@@ -1,3 +1,0 @@
-/home/christopher/CodingProjects/cppprojects/LeetCode/3/CMakeFiles/LeetCode3.dir
-/home/christopher/CodingProjects/cppprojects/LeetCode/3/CMakeFiles/edit_cache.dir
-/home/christopher/CodingProjects/cppprojects/LeetCode/3/CMakeFiles/rebuild_cache.dir
