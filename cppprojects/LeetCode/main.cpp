@@ -1,1 +1,2 @@
-int main() { std::cout << }
+#include <iostream>
+int main() { std::cout << "hello"; }
