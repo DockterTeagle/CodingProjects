@@ -33,10 +33,9 @@
             rustacean.packages.${system}.codelldb
           ];
           shellHook = ''
-            ech
             export PATH="$PATH:${rustacean.packages.${system}.codelldb}/bin"
-            export PATH="$PATH:${rustacean.packages.${system}.rustaceanvim}/bin"
             export PATH="${pkgs.rust-analyzer}/bin:$PATH"
+            export PATH="$PATH:${pkgs.rustfmt}/bin"
           '';
         };
     };
