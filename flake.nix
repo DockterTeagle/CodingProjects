@@ -17,22 +17,23 @@
             clang
             libclang
             rocmPackages_6.llvm.clang-unwrapped
-            cargo
-            rustc
-            rustup
-            rustfmt
-            rust-analyzer
             libgcc
             glib
-            gtk2
             gcc-unwrapped
             llvm_18
             pkg-config
             clang-tools
-            rustacean.packages.${system}.rustaceanvim
             rustacean.packages.${system}.codelldb
+            rustc
+            rustup
+            rustfmt
+            rust-analyzer
+            cargo
           ];
           shellHook = ''
+            rustup default stable
+            rustup component add clippy
+            export PATH="$HOME/.cargo/bin:$PATH"
             export PATH="$PATH:${rustacean.packages.${system}.codelldb}/bin"
             export PATH="${pkgs.rust-analyzer}/bin:$PATH"
             export PATH="$PATH:${pkgs.rustfmt}/bin"
