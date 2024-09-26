@@ -14,20 +14,14 @@
       devShells.${system}.default = pkgs.mkShell
         {
           buildInputs = with pkgs;[
-            clang
-            libclang
             rocmPackages_6.llvm.clang-unwrapped
             libgcc
             glib
             gcc-unwrapped
             llvm_18
             pkg-config
-            clang-tools
             rustacean.packages.${system}.codelldb
-            rustc
             rustup
-            rustfmt
-            rust-analyzer
             cargo
           ];
           shellHook = ''
