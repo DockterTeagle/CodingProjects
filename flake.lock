@@ -847,11 +847,11 @@
         "vimcats": "vimcats"
       },
       "locked": {
-        "lastModified": 1727351475,
-        "narHash": "sha256-QKAVK6ear54Q6mE7kd2LoRnQrFJp/zqMkgE/fxJDHpE=",
+        "lastModified": 1727437264,
+        "narHash": "sha256-ptj2LNzIzoAWxFwCcqf2lMbgWwAdoX3Rtryb34hJhXk=",
         "owner": "mrcjkb",
         "repo": "rustaceanvim",
-        "rev": "99995747f8c8d611504536e5374a808bc35b5fb2",
+        "rev": "431a2b145fb8774dec22a0d1b2c26f60438bff93",
         "type": "github"
       },
       "original": {
