@@ -28,11 +28,6 @@
             devShells.default = pkgs.mkShell
               {
                 buildInputs = with pkgs;[
-                  libcxx
-                  gnumake
-                  cmake
-                  rocmPackages_6.llvm.clang
-                  clang-tools
                   #rust
                   rustacean.packages.${system}.codelldb
                   cargo
@@ -48,6 +43,5 @@
                 '';
               };
           };
-
       };
 }
