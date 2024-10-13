@@ -29,11 +29,18 @@
               {
                 buildInputs = with pkgs;[
                   libcxx
-                  gnumake
+                  valgrind
                   cmake
-                  rocmPackages_6.llvm.clang
+                  rocmPackages.llvm.clang
                   clang-tools
-                  #rust
+                  codespell
+                  conan
+                  cppcheck
+                  doxygen
+                  gtest
+                  lcov
+                  vcpkg
+                  vcpkg-tool
                 ];
                 shellHook = ''
                   export SHELL=$(which zsh)
