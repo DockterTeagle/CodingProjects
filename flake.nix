@@ -26,6 +26,12 @@
             rust-analyzer
             rustfmt
           ];
+          shellHook = ''
+            export SHELL=$(which zsh)
+            if [ -z "$ZSH_VERSION" ]; then
+              exec zsh
+            fi
+          '';
           # shellHook = ''
           #   rustup default stable
           #   rustup component add clippy
