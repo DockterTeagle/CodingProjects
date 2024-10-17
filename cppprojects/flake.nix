@@ -42,12 +42,6 @@
                   vcpkg
                   vcpkg-tool
                 ];
-                shellHook = ''
-                  export SHELL=$(which zsh)
-                  if [ -z "$ZSH_VERSION" ]; then
-                    exec zsh
-                  fi
-                '';
               };
           };
       };

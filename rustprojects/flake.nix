@@ -28,19 +28,13 @@
             devShells.default = pkgs.mkShell
               {
                 buildInputs = with pkgs;[
-                  #rust
                   rustacean.packages.${system}.codelldb
+                  graphviz
                   cargo
                   rustc
                   rust-analyzer
                   rustfmt
                 ];
-                shellHook = ''
-                  export SHELL=$(which zsh)
-                  if [ -z "$ZSH_VERSION" ]; then
-                    exec zsh
-                  fi
-                '';
               };
           };
       };
