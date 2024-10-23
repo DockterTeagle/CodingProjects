@@ -28,6 +28,7 @@
             devShells.default = pkgs.mkShell
               {
                 buildInputs = with pkgs;[
+                  rustacean.packages.${system}.codelldb
                   libcxx
                   valgrind
                   cmake
@@ -42,6 +43,10 @@
                   vcpkg
                   vcpkg-tool
                 ];
+                shellHook = ''
+                  export CODELLDB_PATH=${rustacean.packages.${system}.codelldb}
+                  echo $CODELLDB_PATH
+                '';
               };
           };
       };
