@@ -4,7 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
-  outputs = inputs@ { self, nixpkgs, flake-parts, rustacean, ... }:
+  outputs = inputs@ { self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; }
       {
         systems = [
