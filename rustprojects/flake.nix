@@ -7,9 +7,7 @@
   };
   outputs =
     inputs@{
-      nixpkgs,
       flake-parts,
-      rustacean,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -27,16 +25,13 @@
           system,
           ...
         }:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
         {
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
-              rustacean.packages.${system}.codelldb
+              inputs'.rustacean.packages.codelldb
               graphviz
               cargo
-              rustc
+              rustc # needed?
               rust-analyzer
               rustfmt
             ];
