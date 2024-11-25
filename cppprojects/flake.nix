@@ -30,7 +30,6 @@
         {
           formatter = pkgs.nixfmt-rfc-style;
           checks = {
-            # pre-commit-check = inputs'.pre-commit-hooks.lib.run {
             pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
               src = ./.;
               hooks = {
@@ -40,28 +39,27 @@
               };
             };
           };
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              rustacean.packages.${system}.codelldb
-              libcxx
-              valgrind
-              cmake
-              rocmPackages.llvm.clang
-              clang-tools
-              codespell
-              conan
-              cppcheck
-              doxygen
-              gtest
-              lcov
-              vcpkg
-              vcpkg-tool
-            ];
-            shellHook = # bash
-              ''
-                export CODELLDB_PATH=${rustacean.packages.${system}.codelldb}
-                echo $CODELLDB_PATH
-              '';
+          devShells = {
+            default = pkgs.mkShell {
+              inherit (self'.checks.pre-commit-check) shellHook;
+              buildInputs = with pkgs; [
+                self'.checks.pre-commit-check.enabledPackages
+                rustacean.packages.${system}.codelldb
+                libcxx
+                valgrind
+                cmake
+                rocmPackages.llvm.clang
+                clang-tools
+                codespell
+                conan
+                cppcheck
+                doxygen
+                gtest
+                lcov
+                vcpkg
+                vcpkg-tool
+              ];
+            };
           };
         };
     };

@@ -39,7 +39,9 @@
             };
           };
           devShells.default = pkgs.mkShell {
+            inherit (self'.checks.pre-commit-check) shellHook;
             buildInputs = with pkgs; [
+              self'.checks.pre-commit-check.enabledPackages
               inputs'.rustacean.packages.codelldb
               graphviz
               cargo
