@@ -27,17 +27,18 @@
           ...
         }:
         {
-
-          formatter = pkgs.nixfmt-rfc-style;
           checks = {
             pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
               src = ./.;
               hooks = {
                 nixfmt-rfc-style.enable = true;
+                clang-format.enable = true;
+                clang-tidy.enable = true;
                 rustfmt.enable = true;
               };
             };
           };
+
           devShells.default = pkgs.mkShell {
             inherit (self'.checks.pre-commit-check) shellHook;
             buildInputs = with pkgs; [
