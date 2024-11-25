@@ -41,9 +41,7 @@
           };
           devShells = {
             default = pkgs.mkShell {
-              inherit (self'.checks.pre-commit-check) shellHook;
               buildInputs = with pkgs; [
-                self'.checks.pre-commit-check.enabledPackages
                 rustacean.packages.${system}.codelldb
                 libcxx
                 valgrind
