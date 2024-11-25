@@ -4,6 +4,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     rustacean.url = "github:mrcjkb/rustaceanvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
   };
   outputs =
     inputs@{
@@ -26,6 +27,17 @@
           ...
         }:
         {
+
+          formatter = pkgs.nixfmt-rfc-style;
+          checks = {
+            pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+              src = ./.;
+              hooks = {
+                nixfmt-rfc-style.enable = true;
+                rustfmt.enable = true;
+              };
+            };
+          };
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               inputs'.rustacean.packages.codelldb
