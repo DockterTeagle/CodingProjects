@@ -3,4 +3,3 @@ CompileFlags:
   - -stdlib=libc++
   - -I${LIBCXX_INCLUDE_PATH}
   - -L${LIBCXX_LIB_PATH}
-CompileCommands: build/compile_commands.json
