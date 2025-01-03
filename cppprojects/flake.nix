@@ -32,6 +32,8 @@
                   export CODELLDB_PATH=${inputs'.rustacean.packages.codelldb}
                   export CC=${pkgs.clang}/bin/clang
                   export CXX=${pkgs.clang}/bin/clang++
+                  export LIBCXX_LIB_PATH="${pkgs.libcxx.out}/lib"
+                  export LIBCXX_INCLUDE_PATH="${pkgs.libcxx.dev}/include/c++/v1"
                   export CXXFLAGS="-stdlib=libc++ -I${pkgs.libcxx.dev}/include/c++/v1"
                   export LDFLAGS="-L ${pkgs.libcxx.out}/lib -lc++ -lc++abi"
                 '';
