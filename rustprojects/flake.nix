@@ -12,6 +12,7 @@
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
+      debug = true;
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
@@ -41,7 +42,7 @@
 
           devShells.default = pkgs.mkShell {
             inherit (self'.checks.pre-commit-check) shellHook;
-            buildInputs = with pkgs; [
+            packages = with pkgs; [
               self'.checks.pre-commit-check.enabledPackages
               inputs'.rustacean.packages.codelldb
               graphviz

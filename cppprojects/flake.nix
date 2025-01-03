@@ -2,6 +2,7 @@
   description = "cpp projects flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixd.url = "github:nix-community/nixd";
     rustacean.url = "github:mrcjkb/rustaceanvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
@@ -9,7 +10,6 @@
   outputs =
     inputs@{
       flake-parts,
-      rustacean,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -20,32 +20,34 @@
       ];
       perSystem =
         {
-          config,
-          self',
           inputs',
           pkgs,
-          system,
           ...
         }:
         {
-          formatter = pkgs.nixfmt-rfc-style;
           devShells = {
             default = pkgs.mkShell {
-              buildInputs = with pkgs; [
-                rustacean.packages.${system}.codelldb
-                libcxx
+              shellHook = # bash
+                ''
+                  export CODELLDB_PATH=${inputs'.rustacean.packages.codelldb}
+                  export CC=${pkgs.clang}/bin/clang
+                  export CXX=${pkgs.clang}/bin/clang++
+                  export CXXFLAGS="-stdlib=libc++ -I${pkgs.libcxx.dev}/include/c++/v1"
+                  export LDFLAGS="-L ${pkgs.libcxx.out}/lib -lc++ -lc++abi"
+                '';
+              packages = with pkgs; [
+                inputs'.rustacean.packages.codelldb
+                # inputs'.nixd.packages.nixd
                 valgrind
+                libcxx
                 cmake
-                rocmPackages.llvm.clang
+                clang
                 clang-tools
                 codespell
-                conan
                 cppcheck
                 doxygen
                 gtest
                 lcov
-                vcpkg
-                vcpkg-tool
               ];
             };
           };
