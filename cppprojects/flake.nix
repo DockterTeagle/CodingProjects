@@ -5,7 +5,6 @@
     nixd.url = "github:nix-community/nixd";
     rustacean.url = "github:mrcjkb/rustaceanvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
   };
   outputs =
     inputs@{
@@ -27,15 +26,16 @@
         {
           devShells = {
             default = pkgs.mkShell {
+              stdenv = pkgs.clandStdenv;
               shellHook = # bash
                 ''
+                  export LIBCXX_INCLUDE_PATH=${pkgs.libcxx.dev}/include/c++/v1
+                  export LIBCXX_LIB_PATH=${pkgs.libcxx.out}/lib
                   export CODELLDB_PATH=${inputs'.rustacean.packages.codelldb}
                   export CC=${pkgs.clang}/bin/clang
                   export CXX=${pkgs.clang}/bin/clang++
-                  export LIBCXX_LIB_PATH="${pkgs.libcxx.out}/lib"
-                  export LIBCXX_INCLUDE_PATH="${pkgs.libcxx.dev}/include/c++/v1"
                   export CXXFLAGS="-stdlib=libc++ -I${pkgs.libcxx.dev}/include/c++/v1"
-                  export LDFLAGS="-L ${pkgs.libcxx.out}/lib -lc++ -lc++abi"
+                  export LDFLAGS="-L${pkgs.libcxx.out}/lib -lc++ -lc++abi"
                 '';
               packages = with pkgs; [
                 inputs'.rustacean.packages.codelldb
@@ -43,13 +43,20 @@
                 valgrind
                 libcxx
                 cmake
-                clang
+                cmake-lint
+                cmake-language-server
+                cmake-format
                 clang-tools
+                clang
                 codespell
                 cppcheck
+                cpplint
                 doxygen
                 gtest
                 lcov
+                gdb
+                vcpkg
+                vcpkg-tool
               ];
             };
           };
