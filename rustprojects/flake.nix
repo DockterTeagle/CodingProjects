@@ -33,8 +33,8 @@
               src = ./.;
               hooks = {
                 nixfmt-rfc-style.enable = true;
-                clang-format.enable = true;
-                clang-tidy.enable = true;
+                # clang-format.enable = true;
+                # clang-tidy.enable = true;
                 rustfmt.enable = true;
               };
             };

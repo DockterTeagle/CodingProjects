@@ -16,7 +16,7 @@ class UndergroundSystem {
   std::unordered_map<int, Customer> customers;
   vector<StationLine> lines;
 
-public:
+ public:
   void checkIn(int id, string stationName, int t) {
     Customer newCustomer;
     newCustomer.location = stationName;
