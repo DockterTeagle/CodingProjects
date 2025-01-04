@@ -1,4 +1,6 @@
 CompileFlags:
+  CompilationDatabase:
+    ./build
   Add:
   - -stdlib=libc++
   - -I${LIBCXX_INCLUDE_PATH}
