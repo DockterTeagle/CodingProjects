@@ -1,7 +1,0 @@
-BasedOnStyle: Google
-IndentWidth: 2
-ColumnLimit: 80
-MaxEmptyLinesToKeep: 1
-SpacesBeforeTrailingComments: 2
-AllowAllArgumentsOnNextLine: true
-

@@ -1,1 +1,0 @@
-- [ ] get clangd to work completly with all the libraries
