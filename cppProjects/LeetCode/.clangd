@@ -1,0 +1,9 @@
+CompileFlags:
+  CompilationDatabase:
+    ./build
+  Add:
+  - -stdlib=libc++
+  - -I${LIBCXX_INCLUDE_PATH}
+  - -L${LIBCXX_LIB_PATH}
+  - -I${CMAKE_SOURCE_DIR}/includes
+  - -I${MY_INCLUDE_PATH}
