@@ -1,7 +1,0 @@
-*tags*
-**/.direnv/
-**/target/
-**direnv/
-**pre-commit-config.yaml**
-**/build/**
-**/.cache/*
