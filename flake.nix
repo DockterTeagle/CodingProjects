@@ -35,7 +35,8 @@
               src = ./.;
               hooks = {
                 nixfmt-rfc-style.enable = true;
-                # rustfm
+                rustfmt.enable = true;
+                cargo-check.enable = true;
                 clang-tidy = {
                   enable = true;
                   args = [
