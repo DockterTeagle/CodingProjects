@@ -1,14 +1,15 @@
 {
-  description = "cpp projects flake";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixd.url = "github:nix-community/nixd";
-    rustacean.url = "github:mrcjkb/rustaceanvim";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    # dream2nix.url = "github:nix-community/dream2nix";
+    nixd.url = "github:nix-community/nixd";
+    rustacean.url = "github:mrcjkb/rustaceanvim";
   };
   outputs =
     inputs@{
+      self,
       flake-parts,
       ...
     }:
@@ -20,25 +21,46 @@
       ];
       perSystem =
         {
+          config,
+          self',
           inputs',
           pkgs,
-          self',
           system,
           ...
         }:
         {
+          formatter = pkgs.nixfmt-rfc-style;
           checks = {
             pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
               src = ./.;
               hooks = {
                 nixfmt-rfc-style.enable = true;
-                clang-format.enable = true;
-                clang-tidy.enable = true;
+                # rustfm
+                clang-tidy = {
+                  enable = true;
+                  args = [
+                    "--quiet"
+                    "-p=build"
+                  ];
+                };
               };
             };
           };
           devShells = {
-            default = pkgs.mkShell {
+            rustShell = pkgs.mkShell {
+              packages = with pkgs; [
+                self'.checks.pre-commit-check.enabledPackages
+                inputs'.rustacean.packages.codelldb
+                graphviz
+                cargo
+                rustc # needed?
+                rust-analyzer
+                rustfmt
+              ];
+              inherit (self'.checks.pre-commit-check) shellHook;
+            };
+
+            cppShell = pkgs.mkShell {
               stdenv = pkgs.clangdStdenv;
               shellHook = # bash
                 ''
