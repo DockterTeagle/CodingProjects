@@ -37,6 +37,7 @@
                 nixfmt-rfc-style.enable = true;
                 rustfmt.enable = true;
                 cargo-check.enable = true;
+                clippy.enable = true;
                 clang-tidy = {
                   enable = true;
                   args = [
