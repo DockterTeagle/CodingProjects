@@ -77,6 +77,7 @@
                 ])
                 graphviz
                 rust-analyzer-nightly
+                ltex-ls-plus
               ];
               inherit (self'.checks.pre-commit-check) shellHook;
             };
