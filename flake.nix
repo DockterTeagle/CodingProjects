@@ -6,6 +6,8 @@
     # dream2nix.url = "github:nix-community/dream2nix";
     nixd.url = "github:nix-community/nixd";
     rustacean.url = "github:mrcjkb/rustaceanvim";
+    fenix.url = "github:nix-community/fenix";
+    fenix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     inputs@{
@@ -30,6 +32,10 @@
           ...
         }:
         {
+          _module.args.pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ inputs.fenix.overlays.default ];
+          };
           formatter = pkgs.nixfmt-rfc-style;
           checks = {
             pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
@@ -60,12 +66,17 @@
             rustShell = pkgs.mkShell {
               packages = with pkgs; [
                 self'.checks.pre-commit-check.enabledPackages
+                inputs'.nixd.packages.nixd
                 inputs'.rustacean.packages.codelldb
+                (fenix.complete.withComponents [
+                  "cargo"
+                  "clippy"
+                  "rust-src"
+                  "rustc"
+                  "rustfmt"
+                ])
                 graphviz
-                cargo
-                rustc # needed?
-                rust-analyzer
-                rustfmt
+                rust-analyzer-nightly
               ];
               inherit (self'.checks.pre-commit-check) shellHook;
             };
