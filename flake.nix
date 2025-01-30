@@ -11,6 +11,7 @@
     inputs@{
       self,
       flake-parts,
+      nixpkgs,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -38,6 +39,13 @@
                 rustfmt.enable = true;
                 cargo-check.enable = true;
                 clippy.enable = true;
+                clang-format = {
+                  enable = true;
+                  types_or = nixpkgs.lib.mkForce [
+                    "c"
+                    "c++"
+                  ];
+                };
                 clang-tidy = {
                   enable = true;
                   args = [
