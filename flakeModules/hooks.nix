@@ -26,7 +26,7 @@
     flake-checker.enable = true;
     check-merge-conflicts.enable = true;
     commitizen.enable = true;
-    trufflehog.enable = true;
+    # trufflehog.enable = true;
     convco.enable = true;
     forbid-new-submodules.enable = true;
     gitleaks = {
