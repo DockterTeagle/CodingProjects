@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<analyzerinfo hash="18385288004498576577">
-        <error id="unreadVariable" severity="style" msg="Variable &apos;first&apos; is assigned a value that is never used." verbose="Variable &apos;first&apos; is assigned a value that is never used." cwe="563" file0="/home/cdockter/Documents/CodingProjects/cppprojects/LeetCode/src/unsolved/3/LongestSubstring.cpp">
-            <location file="/home/cdockter/Documents/CodingProjects/cppprojects/LeetCode/src/unsolved/3/LongestSubstring.cpp" line="37" column="27"/>
-            <symbol>first</symbol>
-        </error>
-</analyzerinfo>

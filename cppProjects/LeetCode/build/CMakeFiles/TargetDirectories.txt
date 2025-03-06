@@ -1,4 +1,0 @@
-/home/cdockter/Documents/CodingProjects/cppprojects/LeetCode/build/CMakeFiles/solved_exe.dir
-/home/cdockter/Documents/CodingProjects/cppprojects/LeetCode/build/CMakeFiles/unsolved_exe.dir
-/home/cdockter/Documents/CodingProjects/cppprojects/LeetCode/build/CMakeFiles/edit_cache.dir
-/home/cdockter/Documents/CodingProjects/cppprojects/LeetCode/build/CMakeFiles/rebuild_cache.dir
