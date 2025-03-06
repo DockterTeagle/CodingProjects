@@ -12,20 +12,29 @@
     # clippy
     rustfmt
     treefmt.build.wrapper
+    markdownlint-cli
+    markdownlint-cli2
+    commitizen
+    convco
+    mdsh
+    gitleaks
   ];
   hooks = {
-    alejandra = {
-      enable = true;
-      package = inputs'.alejandra.packages.default;
-    };
     deadnix.enable = true;
+    markdownlint.enable = true;
+    mdsh.enable = true;
     flake-checker.enable = true;
-    # clang-format = {
-    #   enable = true;
-    #   types_or = lib.mkForce ["c" "c++"];
-    # };
+    check-merge-conflicts.enable = true;
+    commitizen.enable = true;
+    trufflehog.enable = true;
+    convco.enable = true;
+    forbid-new-submodules.enable = true;
+    gitleaks = {
+      name = "gitleaks";
+      enable = true;
+      entry = "gitleaks dir";
+    };
     # clang-tidy.enable = true;
-    cmake-format.enable = true;
     # cargo-check.enable = true;
     # clippy.enable = true;
     # rustfmt.enable = true;

@@ -46,11 +46,11 @@
             zig-overlay.overlays.default
           ];
         };
-        devenv = import ./flakeModules/devenv.nix {
+        devenv = import ./flakeModules/devenv-shells.nix {
           inherit self' inputs' pkgs system lib;
           inherit (config) treefmt;
         };
-        treefmt = import ./flakeModules/treefmt.nix {inherit self' inputs' pkgs system;};
+        treefmt = import ./flakeModules/treefmt.nix {inherit self' inputs' pkgs system lib;};
       };
     };
 }
