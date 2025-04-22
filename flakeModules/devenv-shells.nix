@@ -15,6 +15,8 @@
     marksman
     codespell
     gitleaks
+    commitlint
+    bash-language-server
   ];
 in {
   shells = {
@@ -38,15 +40,13 @@ in {
           #cmake
           cmake
           cmake-lint
-          cmake-language-server
+          neocmakelsp
           cmake-format
           #end cmake
           #begin c tools
           clang-tools
           valgrind
-          conan
           cppcheck
-          codespell
           cpplint
           doxygen
           gtest
@@ -62,29 +62,9 @@ in {
         ''
           export CODELLDB_PATH=${inputs'.rustacean.packages.codelldb}/bin/codelldb
         '';
-      tasks = {
-        # "bash:hook" = {
-        #   before = ["devenv:enterShell"];
-        #   exec =
-        #     #bash
-        #     ''
-        #       export CPLUS_INCLUDE_PATH=$(pwd)/include/
-        #       export LIBCXX_INCLUDE_PATH=${pkgs.libcxx.dev}/include/c++/v1
-        #       export LIBCXX_LIB_PATH=${pkgs.libcxx.out}/lib
-        #       export CC=${pkgs.clang}/bin/clang
-        #       export CXX=${pkgs.clang}/bin/clang++
-        #       export CXXFLAGS="-stdlib=libc++ -I${pkgs.libcxx}/include/c++/v1"
-        #       export CODELLDB_PATH=${inputs'.rustacean.packages.codelldb}/bin/codelldb
-        #       export MY_INCLUDE_PATH=$(pwd)/include
-        #     '';
-        # };
-      };
-      #     shellHook = # bash
-      # ''
-      #   ${self'.checks.pre-commit-check.shellHook}
-      # '';
     };
     zigShell = {
+      stdenv = pkgs.zigStdenv;
       languages.zig = {
         enable = true;
         package = pkgs.zigpkgs.master;
@@ -97,13 +77,13 @@ in {
         enable = true;
         channel = "nightly";
       };
-      packages = with pkgs; [
-        inputs'.nixd.packages.nixd
-        inputs'.rustacean.packages.codelldb
-        graphviz
-        rust-analyzer
-        ltex-ls-plus
-      ];
+      packages = with pkgs;
+        [
+          inputs'.rustacean.packages.codelldb
+          graphviz
+          rust-analyzer
+        ]
+        ++ commonPackages;
     };
   };
 }
